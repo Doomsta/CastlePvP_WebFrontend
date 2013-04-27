@@ -20,7 +20,7 @@ class tpl
 	}
 	function add_css_file($path)
 	{
-		$this->css_files .= '<link href="'.$path.'" rel="stylesheet>'."\n";
+		$this->css_files .= '<link href="'.$path.'" rel="stylesheet">'."\n";
 	}
 	function assign_block_vars($array)
 	{
