@@ -100,18 +100,6 @@
     <!-- Placed at the end of the document so the pages load faster -->
 	{$ENDSCRIPT}
     <script src="{$BOOTSRAPPATH}js/jquery.js"></script>
-    <script src="{$BOOTSRAPPATH}js/bootstrap-transition.js"></script>
-    <script src="{$BOOTSRAPPATH}js/bootstrap-alert.js"></script>
-    <script src="{$BOOTSRAPPATH}js/bootstrap-modal.js"></script>
-    <script src="{$BOOTSRAPPATH}js/bootstrap-dropdown.js"></script>
-    <script src="{$BOOTSRAPPATH}js/bootstrap-scrollspy.js"></script>
-    <script src="{$BOOTSRAPPATH}js/bootstrap-tab.js"></script>
-    <script src="{$BOOTSRAPPATH}js/bootstrap-tooltip.js"></script>
-    <script src="{$BOOTSRAPPATH}js/bootstrap-popover.js"></script>
-    <script src="{$BOOTSRAPPATH}js/bootstrap-button.js"></script>
-    <script src="{$BOOTSRAPPATH}js/bootstrap-collapse.js"></script>
-    <script src="{$BOOTSRAPPATH}js/bootstrap-carousel.js"></script>
-    <script src="{$BOOTSRAPPATH}js/bootstrap-typeahead.js"></script>
-
+    <script src="{$BOOTSRAPPATH}js/bootstrap.js"></script>
   </body>
 </html>
