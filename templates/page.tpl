@@ -37,9 +37,9 @@
           <a class="brand" href="#">{$PROJEKTNAME}</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">HOME</a></li>
-              <li><a href="#about">ABOUT</a></li>
-              <li><a href="#contact">ONTRACT</a></li>
+			{foreach key=schluessel item=wert from=$NAV_LINKS}
+              <li class="{$wert.class}"><a href="{$wert.url}">{$wert.name}</a></li>
+			{/foreach}
             </ul>
           </div>
         </div>
@@ -60,11 +60,9 @@
     <div class="row">
       <div class="span3 bs-docs-sidebar">
         <ul class="nav nav-list bs-docs-sidenav">
-          <li class="active"><a href="#lv80overall"><i class="icon-chevron-right"></i> Chars Lv 80 Overall</a></li>
-          <li><a href="#lv80overall"><i class="icon-chevron-right"></i> Chars Lv 80 Overall</a></li>
-          <li><a href="#lv80overall"><i class="icon-chevron-right"></i> Chars Lv 80 Overall</a></li>
-          <li><a href="#lv80overall"><i class="icon-chevron-right"></i> Chars Lv 80 Overall</a></li>
-          
+		{foreach key=schluessel item=wert from=$SUB_NAV_LINKS}
+          <li class="{$wert.class}"><a href="{$wert.url}"><i class="icon-chevron-right"></i>{$wert.name}</a></li>
+        {/foreach}
         </ul>
       </div>
       <div class="span9">

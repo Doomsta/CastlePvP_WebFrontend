@@ -3,6 +3,8 @@ class tpl
 {
 	private $smarty;
 	private $tpl_file;
+	private $nav_links = array();
+	private $sub_nav_links = array();
 	private $js_files = "";
 	private $css_files = "";
 	private $css_code;
@@ -22,9 +24,41 @@ class tpl
 	{
 		$this->css_files .= '<link href="'.$path.'" rel="stylesheet">'."\n";
 	}
-	function assign_block_vars($array)
+	
+	function add_nav_links($array)
 	{
-		
+		foreach($array as $data)
+		{
+			$this->nav_links[] = array( 
+				'name'	=> $data['name'],
+				'url'	=> $data['url'],
+				'class'	=> "none"
+				);
+		}
+	}
+	
+	function add_sub_nav_links($array)
+	{
+		foreach($array as $data)
+		{
+			$this->sub_nav_links[] = array( 
+				'name'	=> $data['name'],
+				'url'	=> $data['url'],
+				'class'	=> "none"
+				);
+		}
+	}
+	
+	private function set_active($name, $array)
+	{	
+		for($i=0;$i<count($array);$i++)
+		{
+			if($array[$i]['name'] == $name)
+				$array[$i]['class'] = 'active';
+			else
+				$array[$i]['class'] = '';
+		}
+		return $array;
 	}
 	
 	function assign_vars($name, $value)
@@ -45,6 +79,9 @@ class tpl
 		$this->smarty->assign("SUBHEADBIG", $array['subHeadBig']);
 		$this->smarty->assign("SUBHEADSMALL", $array['subHeadSmall']);
 		$this->tpl_file = $array['template_file'];
+		
+		$this->smarty->assign("NAV_LINKS", $this->set_active($array['nav_active'], $this->nav_links)); 
+		$this->smarty->assign("SUB_NAV_LINKS", $this->set_active($array['sub_nav_active'], $this->sub_nav_links)); 
 	}
 	
 	function display()

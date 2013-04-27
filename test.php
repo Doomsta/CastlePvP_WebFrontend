@@ -15,6 +15,8 @@ $tpl->add_js_file("./lib/Chart.js");
 $tpl->set_vars(array(
 			'page_title'		=> 'PvP@Castle test',
 			'author'			=> 'author',
+			'nav_active'		=> 'test',
+			'sub_nav_active'	=> 'test',
 			'subHeadBig'		=> 'PvP@Castle test',
 			'subHeadSmall'		=> 'PvP@Castle test',
 			'description'		=> 'PvP@Castle',
