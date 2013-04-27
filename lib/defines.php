@@ -80,4 +80,33 @@ $_faction_color = array(
 	0	=> "#0000FF",
 	1	=> "#CC0000");
 
+##########################
+# Map
+##########################
+
+# map->id to map->name
+# according to Maps.dbc
+# excerpt for battlegrounds only!
+$_map_name = array(
+	489	=> "Kriegshymnenschlucht",
+	529	=> "Arathibecken",
+	566	=> "Auge des Sturms",
+	30	=> "Alteractal",
+	607	=> "Strand der Uralten",
+	626	=> "Zwillingsgipfel",		# 4.x
+	628	=> "Insel der Eroberung",
+	736	=> "Die Schlacht um Gilneas");	# 4.x
+
+# map->id to map->abbreviation
+# accordingo to common usage
+$_map_abbrev = array(
+	489	=> "WSG",
+	529	=> "AB",
+	566	=> "EOS",
+	30	=> "AV",
+	607	=> "SOTA",
+	626	=> "TP",
+	628	=> "IOC",
+	736	=> "Gilneas"); # are you Sirius? :]
+
 ?>
