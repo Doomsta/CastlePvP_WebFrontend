@@ -51,6 +51,19 @@ $_class_name = array(
 	8	=> "Mage",
 	9	=> "Warlock",
 	11	=> "Druid");
+	
+# class->id to class->color
+$_class_color = array(
+	1	=> '#C69B6D',	// warrior
+	2	=> '#F48CBA',	// paladin
+	4	=> '#AAD372',	// hunter
+	4	=> '#FFF468',	// rogue
+	5	=> '#FFFFFF',	// priest
+	6	=> '#C41F3B',	// DK
+	7	=> '#1a3caa',	// shaman
+	8	=> '#68CCEF',	// mage
+	9	=> '#9382C9',	// warlock
+	11	=> '#FF7C0A');	// druid
 
 ##########################
 # Faction
