@@ -40,6 +40,7 @@ class tpl
 	{
 		$this->smarty->assign("PAGE_TITLE", $array['page_title']);
 		$this->smarty->assign("DESCRIPTION", $array['description']);
+		$this->smarty->assign("AUTHOR", $array['author']);
 		$this->smarty->assign("IMAGE", $array['image']);
 		$this->smarty->assign("SUBHEADBIG", $array['subHeadBig']);
 		$this->smarty->assign("SUBHEADSMALL", $array['subHeadSmall']);

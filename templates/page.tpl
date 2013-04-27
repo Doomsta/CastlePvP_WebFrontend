@@ -50,7 +50,7 @@
 <header class="jumbotron subhead">
   <div class="container">
     <h1>{$SUBHEADBIG}</h1>
-    <p class="lead">{$SUBHEADSMALL}
+    <p class="lead">{$SUBHEADSMALL}</p>
   </div>
 </header>
     <!-- Docs nav

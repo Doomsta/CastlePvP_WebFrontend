@@ -6,6 +6,7 @@ include ('common.php');
 $tpl->add_js_file("./lib/Chart.js");
 $tpl->set_vars(array(
 			'page_title'		=> 'PvP@Castle Home',
+			'author'			=> 'author',
 			'subHeadBig'		=> 'PvP@Castle Home',
 			'subHeadSmall'		=> 'PvP@Castle Home',
 			'description'		=> 'PvP@Castle',

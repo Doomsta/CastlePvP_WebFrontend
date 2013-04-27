@@ -11,12 +11,10 @@ $tpl->assign_vars('DATA0', $data0);
 $tpl->assign_vars('DATA1', $data1);
 $tpl->assign_vars('DATA2', $data2);
 
-
-
-
 $tpl->add_js_file("./lib/Chart.js");
 $tpl->set_vars(array(
 			'page_title'		=> 'PvP@Castle test',
+			'author'			=> 'author',
 			'subHeadBig'		=> 'PvP@Castle test',
 			'subHeadSmall'		=> 'PvP@Castle test',
 			'description'		=> 'PvP@Castle',
