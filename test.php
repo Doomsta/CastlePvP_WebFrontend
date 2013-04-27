@@ -17,6 +17,8 @@ $tpl->assign_vars('DATA2', $data2);
 $tpl->add_js_file("./lib/Chart.js");
 $tpl->set_vars(array(
 			'page_title'		=> 'PvP@Castle test',
+			'subHeadBig'		=> 'PvP@Castle test',
+			'subHeadSmall'		=> 'PvP@Castle test',
 			'description'		=> 'PvP@Castle',
 			'image'				=> "",
 			'template_file'		=> 'test.tpl',
