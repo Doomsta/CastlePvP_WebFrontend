@@ -73,6 +73,7 @@
         <!-- Overview
         ================================================== -->
 	{include file="{$TEMPLATEFILE}"}
+		</div>
 	</div>
 </div>
 
