@@ -74,6 +74,10 @@ $_class_color = array(
 $_faction_name = array(
 	0	=> "Allianz",
 	1	=> "Horde");
-
+	
+# faction->id to faction->color
+$_faction_color = array(
+	0	=> "#0000FF",
+	1	=> "#CC0000");
 
 ?>
