@@ -3,20 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title>{$PAGE_TITLE}</title>
-	{$CSS_FILES}
-	{$JS_FILES}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{$DESCRIPTION}">
     <meta name="author" content="{$AUTHOR}">
 
     <!-- Le styles -->
-    
+    {$CSS_FILES}    
     <link href="{$BOOTSRAPPATH}css/bootstrap.css" rel="stylesheet">
     <link href="{$BOOTSRAPPATH}css/bootstrap-responsive.css" rel="stylesheet">
     <link href="{$BOOTSRAPPATH}css/bootstrap.css" rel="stylesheet">
     <link href="{$BOOTSRAPPATH}css/bootstrap-responsive.css" rel="stylesheet">
     <link href="{$BOOTSRAPPATH}css/docs.css" rel="stylesheet">
-    <link href="{$BOOTSRAPPATH}js/google-code-prettify/prettify.css" rel="stylesheet">
 
 	<style>
       body {
@@ -98,8 +95,8 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-	{$ENDSCRIPT}
     <script src="{$BOOTSRAPPATH}js/jquery.js"></script>
     <script src="{$BOOTSRAPPATH}js/bootstrap.js"></script>
+    {$JS_FILES}
   </body>
 </html>
