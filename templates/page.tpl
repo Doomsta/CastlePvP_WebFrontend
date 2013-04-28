@@ -16,7 +16,7 @@
     <link href="{$BOOTSRAPPATH}css/docs.css" rel="stylesheet">
 	
     <!-- special place for chart.js  -->
-    <script src="./lib/chart.js"></script>
+    <script src="./lib/Chart.js"></script>
 	
 	<style>
       body {
