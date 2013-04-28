@@ -39,10 +39,10 @@
           </button>
           <a class="brand" href="#">{$PROJEKTNAME}</a>
           <div class="nav-collapse collapse">
-            <ul class="nav">
-			{foreach key=schluessel item=wert from=$NAV_LINKS}
+            <ul class="nav"> 
+{foreach key=schluessel item=wert from=$NAV_LINKS}
               <li class="{$wert.class}"><a href="{$wert.url}">{$wert.name}</a></li>
-			{/foreach}
+{/foreach}
             </ul>
           </div>
         </div>
@@ -63,9 +63,11 @@
     <div class="row">
       <div class="span3 bs-docs-sidebar">
         <ul class="nav nav-list bs-docs-sidenav">
-		{foreach key=schluessel item=wert from=$SUB_NAV_LINKS}
+{if !$SUB_NAV_LINKS}
+{foreach key=schluessel item=wert from=$SUB_NAV_LINKS}
           <li class="{$wert.class}"><a href="{$wert.url}"><i class="icon-chevron-right"></i>{$wert.name}</a></li>
-        {/foreach}
+{/foreach}
+{/if}
         </ul>
       </div>
       <div class="span9">
