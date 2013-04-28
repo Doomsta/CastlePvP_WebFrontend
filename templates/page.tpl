@@ -14,7 +14,10 @@
     <link href="{$BOOTSRAPPATH}css/bootstrap.css" rel="stylesheet">
     <link href="{$BOOTSRAPPATH}css/bootstrap-responsive.css" rel="stylesheet">
     <link href="{$BOOTSRAPPATH}css/docs.css" rel="stylesheet">
-
+	
+    <!-- special place for chart.js  -->
+    <script src="./lib/chart.js"></script>
+	
 	<style>
       body {
         padding-top: 40px; /* 60px to make the container go all the way to the bottom of the topbar */
