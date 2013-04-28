@@ -18,7 +18,7 @@ class tpl
 	}
 	function add_js_file($path)
 	{
-		$this->js_files .= '<script language="javascript" type="text/javascript" src="'.$path.'"></script>'."\n";
+		$this->js_files .= '<script src="'.$path.'"></script>'."\n";
 	}
 	function add_css_file($path)
 	{

@@ -100,5 +100,6 @@
     <script src="{$BOOTSRAPPATH}js/jquery.js"></script>
     <script src="{$BOOTSRAPPATH}js/bootstrap.js"></script>
     {$JS_FILES}
+    {$ENDSCRIPT}
   </body>
 </html>
