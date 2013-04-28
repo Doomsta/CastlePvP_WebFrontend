@@ -16,10 +16,12 @@ class tpl
 		require('smarty/Smarty.class.php');
 		$this->smarty = new Smarty;
 	}
+
 	function add_js_file($path)
 	{
 		$this->js_files .= '<script src="'.$path.'"></script>'."\n";
 	}
+
 	function add_css_file($path)
 	{
 		$this->css_files .= '<link href="'.$path.'" rel="stylesheet">'."\n";
@@ -34,18 +36,16 @@ class tpl
 				'url'	=> $data['url'],
 				'class'	=> "none"
 				);
-		}
-	}
-	
-	function add_sub_nav_links($array)
-	{
-		foreach($array as $data)
-		{
-			$this->sub_nav_links[] = array( 
-				'name'	=> $data['name'],
-				'url'	=> $data['url'],
-				'class'	=> "none"
-				);
+
+			// load submenu if specified
+			if (isset($data['sub']))
+				foreach ($data['sub'] as $subdata)
+		                        $this->sub_nav_links[] = array( 
+		                                'name'  => $subdata['name'],
+		                                'url'   => $subdata['url'],
+						'icon'	=> $subdata['icon'],
+		                                'class' => "none"
+		                                );
 		}
 	}
 	
@@ -70,6 +70,7 @@ class tpl
 	{
 		$this->script .= "<script>".$value."</script>\n";
 	}
+
 	function set_vars($array)
 	{
 		$this->smarty->assign("PAGE_TITLE", $array['page_title']);

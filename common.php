@@ -9,25 +9,51 @@ $tpl->assign_vars("BOOTSRAPPATH", $rootpath.'bootstrap/');
 $tpl->assign_vars("PROJEKTNAME", PROJEKTNAME);
 $tpl->add_css_file($rootpath."css/common.css");
 $nav_links = array(
-	1 => array(
+	0 => array(
 		'name'	=> 'Home',
 		'url'	=> './index.php'
 		),
+	1 => array(
+		'name'	=> 'Schlachtfelder',
+		'url'	=> './battlegrounds.php',
+		'sub'   => array(
+			0 => array('name'	=> 'Übersicht',
+				   'url'	=> './battlegrounds.php'),
+
+			4 => array('name'	=> 'Kriegshymnenschlucht',
+				   'url'	=> './battlegrounds_wsg.php',
+				   'icon'	=> './img/battlegrounds/489.jpg'),
+
+			2 => array('name'	=> 'Arathibecken',
+				   'url'	=> './battlegrounds_ab.php',
+				   'icon'	=> './img/battlegrounds/529.jpg'),
+
+			3 => array('name'	=> 'Auge des Sturms',
+				   'url'	=> './battlegrounds_eos.php',
+				   'icon'	=> './img/battlegrounds/566.jpg'),
+
+			1 => array('name'	=> 'Alteractal',
+				   'url'	=> './battlegrounds_av.php',
+				   'icon'	=> './img/battlegrounds/30.jpg'),
+
+			5 => array('name'	=> 'Strand der Uralten',
+				   'url'	=> './battlegrounds_sota.php',
+				   'icon'	=> './img/battlegrounds/607.jpg'))
+		),
 	2 => array(
-		'name'	=> 'test',
-		'url'	=> './test.php'
+		'name'	=> 'Aktivit&auml;tsrangliste',
+		'url'	=> './activity.php'
 		),
 	3 => array(
-		'name'	=> 'test3',
-		'url'	=> './test.php'
+		'name'	=> 'Charakterprofil',
+		'url'	=> './profile.php'
 		),
 	4 => array(
-		'name'	=> 'test4',
-		'url'	=> './test.php'
-		)
+		'name'	=> 'FAQ',
+		'url'	=> './faq.php'
+		),
 	);
 $tpl->add_nav_links($nav_links);
-$tpl->add_sub_nav_links($nav_links);
 require_once($rootpath.'lib/defines.php');
 
 # MySQL Connection
