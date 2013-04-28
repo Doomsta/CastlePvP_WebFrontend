@@ -29,6 +29,9 @@ class tpl
 	
 	function add_nav_links($array)
 	{
+		// get current active page to determine whether to show submenu
+		$path_parts = pathinfo($_SERVER['PHP_SELF']);
+
 		foreach($array as $data)
 		{
 			$this->nav_links[] = array( 
@@ -37,21 +40,32 @@ class tpl
 				'class'	=> "none"
 				);
 
-			// load submenu if specified
-			if (isset($data['sub'])) {
-				foreach ($data['sub'] as $subdata)
-				{
-		                        $tmp = array( 
-		                                'name'  => $subdata['name'],
-		                                'url'   => $subdata['url'],
-		                                'class' => "none"
-		                                );
+			if (!isset($data['sub']))
+				continue;
 
-					if (isset($subdata['icon']))
-						$tmp['icon'] = $subdata['icon'];
+			// determine if submenu is needed
+			$show_submenu = false;
+			foreach ($data['sub'] as $sdata)
+			{
+				$tmp = pathinfo($sdata['url']);
+				if ($tmp['basename'] == $path_parts['basename'])
+					$show_submenu = true;
+			}
+			if (!$show_submenu)
+				continue;
 
-					$this->sub_nav_links[] = $tmp;
-				}
+			foreach ($data['sub'] as $subdata)
+			{
+		        	$tmp = array( 
+		                	'name'  => $subdata['name'],
+		                	'url'   => $subdata['url'],
+		               		'class' => "none"
+		                        );
+
+				if (isset($subdata['icon']))
+					$tmp['icon'] = $subdata['icon'];
+
+				$this->sub_nav_links[] = $tmp;
 			}
 		}
 	}
