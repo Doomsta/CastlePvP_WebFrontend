@@ -38,14 +38,21 @@ class tpl
 				);
 
 			// load submenu if specified
-			if (isset($data['sub']))
+			if (isset($data['sub'])) {
 				foreach ($data['sub'] as $subdata)
-		                        $this->sub_nav_links[] = array( 
+				{
+		                        $tmp = array( 
 		                                'name'  => $subdata['name'],
 		                                'url'   => $subdata['url'],
-						'icon'	=> $subdata['icon'],
 		                                'class' => "none"
 		                                );
+
+					if (isset($subdata['icon']))
+						$tmp['icon'] = $subdata['icon'];
+
+					$this->sub_nav_links[] = $tmp;
+				}
+			}
 		}
 	}
 	

@@ -65,7 +65,7 @@
         <ul class="nav nav-list bs-docs-sidenav">
 {if !$SUB_NAV_LINKS}
 {foreach key=schluessel item=wert from=$SUB_NAV_LINKS}
-          <li class="{$wert.class}"><a href="{$wert.url}"><i class="icon-chevron-right"></i>{$wert.name}</a></li>
+          <li class="{$wert.class}"><a href="{$wert.url}"><i class="icon-chevron-right"></i>{if isset($wert.icon)}<img src="{$wret.icon}" width="16" height="16" />{/if}{$wert.name}</a></li>
 {/foreach}
 {/if}
         </ul>
