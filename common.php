@@ -29,4 +29,10 @@ $nav_links = array(
 $tpl->add_nav_links($nav_links);
 $tpl->add_sub_nav_links($nav_links);
 require_once($rootpath.'lib/defines.php');
+
+# MySQL Connection
+mysql_connect($mysql_host, $mysql_user, $mysql_pass);
+mysql_select_db($mysql_db);
+unset($mysql_pass); # lose the password right here, we don't need if anymore afterwards
+
 ?>
