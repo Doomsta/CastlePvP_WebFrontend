@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('UTC');
+
 $rootpath = './';
 require_once($rootpath.'lib/tpl.class.php');
 require_once($rootpath.'config.php'); 
