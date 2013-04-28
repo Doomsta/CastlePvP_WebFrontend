@@ -4,7 +4,7 @@ require_once($rootpath."lib/datetime.php");
 require_once($rootpath."lib/formatting.php");
 
 // configuration
-$interval = Boundaries::Day;
+$interval = Boundaries::Week;
 
 $credit = 300; # award 300s (=5m) per record by default
 $min_players = array(   
@@ -17,7 +17,7 @@ $min_players = array(
 
 
 // here be dragons
-$boundary = get_boundaries(time()-6*86400, $interval);
+$boundary = get_boundaries(time()-86400, $interval);
 $tpl->assign_vars('begin', date("r", $boundary[0]));
 $tpl->assign_vars('end', date("r", $boundary[1]));
 
@@ -47,10 +47,17 @@ while ($row = mysql_fetch_array($result, MYSQL_ASSOC))
 // group data by faction and player and prepare for assignment
 // player[faction][pkey][$mapid|sum|identity]
 $players = array();
+$battlegrounds = array();
+$n = 0;
 foreach ($tmp as $bg => $dataset)
 {
+	$last = 0;
         foreach ($dataset as $timestamp => $datapoint)
         {
+		if (($timestamp - $last) < 300)
+			continue; # skip, if timestamp is not newer than 5 minutes, possible duplicate log event
+		$last = $timestamp;
+
                 // determine if battleground has enough players to stay open,
                 // otherwise only award 0.5*credit
                 if (count($datapoint) < $min_players[$bg])
@@ -58,12 +65,19 @@ foreach ($tmp as $bg => $dataset)
                 else
                         $award_credit = $credit;
 
+		if (!isset($battlegrounds[$bg]))
+			$battlegrounds[$bg] = 0;
+		if (!isset($battlegrounds['sum']))
+			$battlegrounds['sum'] = 0;
+
+		$battlegrounds[$bg] += $award_credit;
+		$battlegrounds['sum'] += $award_credit;
                 // echo "<pre>".$timestamp."\t".$bg."\t".count($datapoint)."\t".$award_credit."\n</pre>";
 
                 foreach ($datapoint as $player)
                 {
-                        //$pkey = sha1($player['name'].$player['faction'].$player['class']);
-                        $pkey = $player['name'];
+                        $pkey = sha1($player['name'].$player['faction'].$player['class']);
+                        //$pkey = $player['name'];
 			$faction = $player['faction'];
 
                         if (!isset($players[$faction][$pkey]))
@@ -98,6 +112,7 @@ foreach ($players as $key => $value)
 
 // actual player data
 //print_r($players);
+$tpl->assign_vars('dataset_summary', $battlegrounds);
 $tpl->assign_vars('dataset', $players);
 
 // map list, remove 4.x maps for this listing, remove ioc also
@@ -133,3 +148,4 @@ $tpl->set_vars(array(
 			));
 $tpl->display();
 ?>
+

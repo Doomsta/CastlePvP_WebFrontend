@@ -23,8 +23,15 @@
 					<th>Summe</th>
 				</tr>
 				<tr>
-					<th colspan="7" style="background:{$faction_color[$faction_id]};color:#fff;font-variant:small-caps;text-align:center;"><big>{$faction_name[$faction_id]}</big></th>
+					<th colspan="{2 + count($maps)}" style="background:{$faction_color[$faction_id]};color:#fff;font-variant:small-caps;text-align:center;"><big>{$faction_name[$faction_id]}</big></th>
 				</tr>
+                                <tr>
+                                        <td style="background-color:#D0D0D0;"></td>
+                                        {foreach $maps as $mapid => $mapname}
+                                        <td style="background-color:#D0D0D0;text-align:center;vertical-align:middle;">{if isset($dataset_summary[$mapid])}<strong>{$dataset_summary[$mapid]/60}</strong><br /><small>Min.</small>{else}-{/if}</td>
+                                        {/foreach}
+                                        <td style="background-color:#D0D0D0;text-align:center;"><strong>{$dataset_summary['sum']/60}</strong><br />Min.</td>
+                                </tr>
 				{foreach $faction as $player}
 				{if $player['sum'] >= (15*60)}
 				<tr>
@@ -55,3 +62,4 @@
 	Keine Dateien f&uuml;r diesen Zeitraum verf&uuml;gbar.
 	{/if}
 </section>
+
