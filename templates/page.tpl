@@ -69,6 +69,7 @@
 {/foreach}
 {/if}
         </ul>
+		<iframe src="./shout_box/shoutbox.php"  scrolling="no" width="250" frameborder="0" seamless="seamless"></iframe> 
       </div>
       <div class="span9">
 	
@@ -101,6 +102,21 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{$BOOTSRAPPATH}js/jquery.js"></script>
     <script src="{$BOOTSRAPPATH}js/bootstrap.js"></script>
+	<script type="text/javascript">
+		var framefenster = document.getElementsByTagName("iFrame");
+		var auto_resize_timer = window.setInterval("autoresize_frames()", 400);
+		function autoresize_frames() {
+			for (var i = 0; i < framefenster.length; ++i) {
+				if(framefenster[i].contentWindow.document.body){
+					var framefenster_size = framefenster[i].contentWindow.document.body.offsetHeight;
+					if(document.all && !window.opera) {
+						framefenster_size = framefenster[i].contentWindow.document.body.scrollHeight;
+					}
+					framefenster[i].style.height = (framefenster_size+20) + 'px';
+				}
+			}
+		}
+	</script>
     {$JS_FILES}
     {$ENDSCRIPT}
   </body>
