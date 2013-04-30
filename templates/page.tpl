@@ -62,7 +62,7 @@
 <div class="container">
     <div class="row">
       <div class="span3 bs-docs-sidebar">
-        <ul class="nav nav-list bs-docs-sidenav">
+        <ul class="nav nav-list bs-docs-sidenav" style="box-shadow:0px 0px">
 {if isset($SUB_NAV_LINKS)}
 {foreach key=schluessel item=wert from=$SUB_NAV_LINKS}
           <li class="{$wert.class}"><a href="{$wert.url}"><i class="icon-chevron-right"></i>{if isset($wert.icon)}<img src="{$wert.icon}" width="16" height="16" style="padding-right: 4px;" />{/if}{$wert.name}</a></li>
