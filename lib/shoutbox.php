@@ -47,7 +47,7 @@
 		while($row = mysql_fetch_assoc($sql_query)){
 			$name= stripslashes($row['name']);
 			$message = stripslashes($row['message']); /* Old: htmlentities(stripslashes(htmlspecialchars($row['message']))); */
-			if($setOddEven == 1){
+			if($shoutbox_set_odd_even == true){
 				if($postsCount & 1){
 					$postClassJson = ', "odd"';
 					$postClass = ' odd';

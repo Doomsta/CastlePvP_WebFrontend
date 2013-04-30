@@ -10,4 +10,7 @@ $mysql_db   = "somedb";
 # Piwik Tracking
 $piwik_tracking = true;
 
+# Shoutbox
+$shoutbox_set_odd_even = true;
+
 ?>
