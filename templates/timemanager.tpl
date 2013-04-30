@@ -5,7 +5,7 @@
         <form id="datepicker_form" method="GET" style="display:inline;">
         <input type="hidden" name="i" value="{$param_i}" />
         <div id="datepicker" class="input-append" style="display:inline">
-            <input data-format="dd.MM.yyyy" name="d" type="text" value="{$param_d}" />
+            <input data-format="dd.MM.yyyy" name="d" type="text" readonly="" value="{$param_d}" />
             <span class="add-on">
                 <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
             </span>

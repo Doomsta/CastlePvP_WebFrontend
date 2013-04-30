@@ -34,7 +34,10 @@ $tpl->add_js_file($rootpath."/js/bootstrap-datetimepicker.min.js");
 $tpl->add_script("  $(function() {
     $('#datepicker').datetimepicker({
       pickTime: false,
-      language : 'de'
+      language : 'de',
+      weekStart : 1,
+      startDate : new Date(2013, 3, 28),
+      endDate : new Date()
     });
     $('#datepicker').on('changeDate', function (e) {
         document.getElementById('datepicker_form').submit();
