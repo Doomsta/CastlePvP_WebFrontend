@@ -68,6 +68,7 @@
           <li class="{$wert.class}"><a href="{$wert.url}"><i class="icon-chevron-right"></i>{if isset($wert.icon)}<img src="{$wert.icon}" width="16" height="16" style="padding-right: 4px;" />{/if}{$wert.name}</a></li>
 {/foreach}
 {/if}
+		{include file="shoutbox.tpl"}
         </ul>
       </div>
       <div class="span9">

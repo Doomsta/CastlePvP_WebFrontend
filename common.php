@@ -60,7 +60,7 @@ $tpl->add_nav_links($nav_links);
 mysql_connect($mysql_host, $mysql_user, $mysql_pass);
 mysql_select_db($mysql_db);
 unset($mysql_pass); # lose the password right here, we don't need if anymore afterwards
-
+include('./lib/shoutbox.php');
 # Piwik Tracking Support
 $tpl->assign_vars('piwik_tracking', $piwik_tracking);
 
