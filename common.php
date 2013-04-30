@@ -3,6 +3,7 @@ date_default_timezone_set('UTC');
 
 $rootpath = './';
 require_once($rootpath.'lib/tpl.class.php');
+require_once($rootpath.'lib/defines.php');
 require_once($rootpath.'config.php'); 
 $tpl = new tpl;
 $tpl->assign_vars("BOOTSRAPPATH", $rootpath.'bootstrap/');
@@ -54,11 +55,13 @@ $nav_links = array(
 		),
 	);
 $tpl->add_nav_links($nav_links);
-require_once($rootpath.'lib/defines.php');
 
 # MySQL Connection
 mysql_connect($mysql_host, $mysql_user, $mysql_pass);
 mysql_select_db($mysql_db);
 unset($mysql_pass); # lose the password right here, we don't need if anymore afterwards
+
+# Piwik Tracking Support
+$tpl->assign_vars('piwik_tracking', $piwik_tracking);
 
 ?>

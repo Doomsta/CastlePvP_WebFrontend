@@ -17,17 +17,14 @@ $min_players = array(
 
 
 // here be dragons
-setlocale(LC_TIME, "de_DE.UTF-8");
-$boundary = get_boundaries(time(), $interval);
-$tpl->assign_vars('begin', strftime("%A, %d. %B", $boundary[0]));
-$tpl->assign_vars('end', strftime("%A, %d. %B", $boundary[1]));
+require_once($rootpath."timemanager.php");
 
 // fetch data from db
 $query = sprintf("SELECT timestamp, name, guild, faction, race, class, bg 
 		 FROM by_character
 		 WHERE timestamp >= %d
 		 AND timestamp <= %d
-		 ORDER BY timestamp ASC", $boundary[0], $boundary[1]);
+		 ORDER BY timestamp ASC", $bounds[0], $bounds[1]);
 $result = mysql_query($query);
 
 // $tmp[battleground][time][players]
@@ -62,7 +59,8 @@ foreach ($tmp as $bg => $dataset)
                 // determine if battleground has enough players to stay open,
                 // otherwise only award 0.5*credit
                 if (count($datapoint) < $min_players[$bg])
-                        $award_credit = 0.5 * $credit;
+                        $award_credit = 0;
+//                        $award_credit = 0.5 * $credit;
                 else
                         $award_credit = $credit;
 

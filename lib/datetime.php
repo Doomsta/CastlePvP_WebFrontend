@@ -15,6 +15,18 @@ class Boundaries
     const Year = 3;
 }
 
+$_time_period_name = array(
+    "d" => "Tag",
+    "w" => "Woche",
+    "m" => "Monat",
+    "y" => "Jahr");
+
+$_time_period_boundary = array(
+    "d" => Boundaries::Day,
+    "w" => Boundaries::Week,
+    "m" => Boundaries::Month,
+    "y" => Boundaries::Year);
+
 function get_boundaries($timestamp, $boundary)
 {
 	if ($boundary == Boundaries::Day)

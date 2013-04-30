@@ -1,11 +1,6 @@
 <section id="playtime">
 	<h2>Spielzeit</h2>
-	<p>von {$begin} bis {$end}</p>
-	<!--<div class="btn-group">
-		<a href="?s=600"><button class="btn">Heute</button></a>
-		<a href="?s=1200"><button class="btn">Gestern</button></a>
-		<a href="?s=1800"><button class="btn">Diese Woche</button></a>
-	</div>-->
+    {include file='timemanager.tpl'}
 	{if count($dataset) > 0}
 	<table>
 		<tr>
