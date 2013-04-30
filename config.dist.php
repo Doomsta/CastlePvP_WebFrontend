@@ -7,4 +7,7 @@ $mysql_user = "user";
 $mysql_pass = "secret";
 $mysql_db   = "somedb";
 
+# Piwik Tracking
+$piwik_tracking = true;
+
 ?>

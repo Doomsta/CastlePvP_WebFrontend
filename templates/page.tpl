@@ -103,5 +103,6 @@
     <script src="{$BOOTSRAPPATH}js/bootstrap.js"></script>
     {$JS_FILES}
     {$ENDSCRIPT}
+    {if $piwik_tracking}{include file='piwik.tpl'}{/if}
   </body>
 </html>
