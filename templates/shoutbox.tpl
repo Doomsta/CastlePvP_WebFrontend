@@ -1,4 +1,5 @@
-<h3>Shoutbox</h3>
+<div style="padding-left:12px;">
+	<h3>Shoutbox</h3>
 	<form id="shout" class="wrapper" method="post">
 		<input type="hidden" name="format" value="json" />
 		<input type="hidden" name="action" value="write">
@@ -17,7 +18,7 @@
 	{$wert}
 	{/foreach}
 	</div>
-
+</div>
 <script>!window.jQuery && document.write('<script src="./bootstrap/js/jquery.js"><\/script>')</script>
 <script src="./js/shoutbox.js?v=1"></script>
 
