@@ -11,21 +11,28 @@ setlocale(LC_ALL, "de_DE.UTF-8");
 // parse get parameters
 // * d = date/timestamp
 $date_input_format = "%d.%m.%Y";
-$now = time();
-$param_d = strftime($date_input_format, time());
+$now = isset($_SESSION['timemgr_now']) ? $_SESSION['timemgr_now'] : time();
+$param_d = isset($_SESSION['timemgr_date_str']) ? $_SESSION['timemgr_date_str'] : strftime($date_input_format, time());
 if (isset($_GET['d']))
 {
     $now = strtotime($_GET['d']);
     $param_d = strftime($date_input_format, $now);
+
+    // session memory
+    $_SESSION['timemgr_now'] = $now;
+    $_SESSION['timemgr_date_str'] = $param_d;
 }
 
 // * i = interval
-$param_i = Boundaries::Week; # default to week
-$param_i_str = "w";
+$param_i = isset($_SESSION['timemgr_interval']) ? $_time_period_boundary[$_SESSION['timemgr_interval']] : Boundaries::Week; # default to week
+$param_i_str = (isset($_SESSION['timemgr_interval'])) ? $_SESSION['timemgr_interval'] : "w";
 if (isset($_GET['i']) && isset($_time_period_boundary[$_GET['i']]))
 {
     $param_i = $_time_period_boundary[$_GET['i']];
     $param_i_str = $_GET['i'];
+
+    // session memory
+    $_SESSION['timemgr_interval'] = $param_i_str;
 }
 // assign some templates vars
 // load css/js files
