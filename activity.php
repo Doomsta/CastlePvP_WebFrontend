@@ -129,8 +129,8 @@ $tpl->assign_vars('faction_color', $_faction_color);
 
 // template stuff
 $tpl->set_vars(array(
-			'page_title'		=> 'PvP@Castle',
-			'author'		=> 'author',
+			'page_title'		=> 'PvP@Castle - Aktivit&auml;tsrangliste',
+			'author'		=> 'hexa-',
 			'nav_active'		=> 'Spielzeit',
 			'sub_nav_active'	=> 'Spielzeit',
 			'subHeadBig'		=> 'PvP@Castle',
