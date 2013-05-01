@@ -14,7 +14,7 @@ if($tmp == false){
 	{
 		foreach($tmp[$i] as $j => $row_j)
 		{
-			$tmp[2][$j]['player'] = $castle->getArenaTeam($row_j['name'],2);
+			$tmp[2][$j]['player'] = $castle->getArenaTeam($row_j['name']);
 			foreach($tmp[2][$j]['player'] as $k => $row_j)
 				$tmp[2][$j]['player'][$k]['classColor'] = $_class_color[$row_j['classId']]; 
 		}

@@ -33,12 +33,11 @@ class castleImport
 		return $out;
 	}
 	
-	// $ts = TeamSize (int) 2,3,5
-	public function getArenaTeam($name, $ts)
+	public function getArenaTeam($name)
 	{
 		$out = array();
 		$name = str_replace(" ", "+", $name); 
-		$xml = $this->getXML($this->armoryUrl.'team-info.xml?b=WoW-Castle&r=WoW-Castle+PvE&ts='.$ts.'&select='.$name);
+		$xml = $this->getXML($this->armoryUrl.'team-info.xml?b=WoW-Castle&r=WoW-Castle+PvE&select='.$name);
 		foreach($xml->teamInfo->arenaTeam->members->character as $row)
 		{
 			$out[] = array(
