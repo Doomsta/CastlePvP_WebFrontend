@@ -11,90 +11,85 @@ class Operation
 {
 	const Average = 0;
 	const Maximum = 1;
+	const Sum = 2;
 }
 
-function group_dataset_by_interval($dataset, $index, $initstep, $stepsize = 300, $op = Operation::Maximum)
+function group_dataset_by_steps($dataset, $index, $firststep, $laststep, $stepsize, $op = Operation::Maximum)
 {
-	if (empty($dataset))
-		return;
+	if ($stepsize < 300)
+		$stepsize = 300; # recordings don't happen more often than every 300 seconds
 
-	if (empty($index) || is_array($index) && count($index) == 0) # there is no point in grouping if we have no fields to collapse
-		return; 
+	$out_tmp = array();
 
-	if ($stepsize < 300) # recording happens in steps of 300s, so there is no point to have stepsizes less than that as it will create padding between each recording
-		$stepsize = 300;
-
-	$out_tmp = array(); # form final output in this temporary array
-	$dataset_length = count($dataset);
-
-	# 1) Set up the initial step from first timestamp to timestamp+stepsize
-	$step = $initstep;
-	$step_until = $step + $stepsize;
-	$i = 0;
-	while ($i < $dataset_length) { 
-		# handle a step
+	$step_count = ($laststep - $firststep) / $stepsize;
+	$dataset_iter = 0;
+	$dataset_size = count($dataset);
+	for ($step_iter = 0; $step_iter < $step_count; $step_iter++)
+	{
+		# determine step boundaries
+		$step_from = $firststep + ($step_iter * $stepsize);
+		$step_until = $firststep + (($step_iter + 1) * $stepsize);
 		$step_tmp = array();
 
-		for ($j = $i; $j < $dataset_length; $j++)
+		# walk over dataset and collect appropriate entries
+		for ($i = $dataset_iter; $i < $dataset_size; $i++)
 		{
-			$datapoint = $dataset[$j];
+			$datapoint = $dataset[$i];
+			
+			if ($datapoint[0] < $step_from)
+				continue; # too early, skip to first
 
-			# find each dataset that belongs to the current step
-                        if ($datapoint[0] < $step)
-                        {
-                                $i++;
-                                continue;
-                        }
 			if ($datapoint[0] > $step_until)
-				break;
+				break; # too late, there will be no more matching entries
 
-			# handle specified indexes to each datapoint
 			foreach ($index as $iter)
-			{
 				$step_tmp[$iter][] = $datapoint[$iter];
-			}
-			$i++;
 		}
+		$dataset_iter += $i; # write back iterator
 
-		# collapse step data
+		# collapse the data for this step
 		$collapse_tmp = array();
-		# handle steps without data, set values to zero
+	
+		# if we have no data, set values to zero
 		if (empty($step_tmp))
 			foreach ($index as $iter)
 				$collapse_tmp[$iter] = 0;
-		# else call function on data row
+			# else call $op on each data row
 		else
 			foreach ($step_tmp as $iter => $datarow)
 			{
-				if ($op == Operation::Maximum)
-					$collapse_tmp[$iter] = max($datarow);
-				elseif ($op == Operation::Average)
-					$collapse_tmp[$iter] = round(array_sum($datarow) / count($datarow));
+				switch ($op) {
+					case Operation::Maximum:
+						$collapse_tmp[$iter] = max($datarow);
+						break;
+					case Operation::Average:
+						$collapse_tmp[$iter] = round(array_sum($datarow) / count($datarow));
+						break;
+					case Operation::Sum:
+						$collapse_tmp[$iter] = array_sum($datarow);
+						break;
+				}
 			}
-
-		# fill the collapsed tmp row with persistent data (=iterators not in $index)
-		if (isset($dataset[$i]))
+	
+		# fill collapsed_tmp with persistent data (iter not in $index)
+		if (isset($dataset[$dataset_iter]))
 		{
-			for ($k = 0; $k < count($dataset[$i]); $k++)
+			for ($j = 0; $j < count($dataset[$dataset_iter]); $j++)
 			{
-				if (in_array($k, $index))
+				if (in_array($j, $index))
 					continue;
-				if (isset($dataset[$i][$k]))
-					$collapse_tmp[$k] = $dataset[$i][$k];
-				else $collapse_tmp[$k] = 0; # TODO: research how setting this value affects the overall output and why $dataset[$i][$k] might trigger undefined index notice
+				if (isset($dataset[$dataset_iter][$j]))
+					$collapse_tmp[$j] = $dataset[$dataset_iter][$j];
+				else $collapse_tmp[$j] = 0; # we have no proper static data for empty time spans
 			}
 		}
-		$collapse_tmp[0] = round(($step + $step_until) / 2);
-
-		# write back step_tmp to out_tmp
+		# set the "average" timestamp
+		$collapse_tmp[0] = round($step_from + $step_until) / 2;
+	
+		# write back step to output temp
 		$out_tmp[] = $collapse_tmp;
-
-		# prepare next step
-		$step += $stepsize;
-		$step_until = $step + $stepsize;
 	}
 
 	return $out_tmp;
 }
-
 ?>
