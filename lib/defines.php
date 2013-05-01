@@ -36,7 +36,7 @@ $_race_faction = array(
 	11	=> 0,
 	22	=> 0);
 unset($_race_faction[9]);
-unset($_face_faction[22]);
+unset($_race_faction[22]);
 
 ###########################
 # Classes
