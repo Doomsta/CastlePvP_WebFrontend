@@ -32,7 +32,7 @@ $tpl->set_vars(array(
 			'subHeadBig'		=> 'PvP@Castle',
 			'subHeadSmall'		=> 'Arena',
 			'description'		=> 'PvP@Castle',
-			'image'				=> "",
+			'image'				=> './img/icon.png',
 			'template_file'		=> 'arena.tpl',
 			));
 $tpl->display();

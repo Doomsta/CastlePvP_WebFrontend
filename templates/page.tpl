@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{$DESCRIPTION}">
     <meta name="author" content="{$AUTHOR}">
-
+	<link rel="shortcut icon" href="{$IMAGE}" type="image/png" />
+	<link rel="icon" href="{$IMAGE}" type="image/png" />
     <!-- Le styles -->
     {$CSS_FILES}    
     <link href="{$BOOTSRAPPATH}css/bootstrap.css" rel="stylesheet">
