@@ -19,6 +19,8 @@ $_race_name = array(
 	10	=> "Blutelf",
 	11	=> "Draenei",
 	22	=> "Worg");	# 4.x
+unset($_race_name[9]);
+unset($_race_name[22]);
 
 $_race_faction = array(
 	1	=> 0,
@@ -33,6 +35,8 @@ $_race_faction = array(
 	10	=> 1,
 	11	=> 0,
 	22	=> 0);
+unset($_race_faction[9]);
+unset($_face_faction[22]);
 
 ###########################
 # Classes
@@ -96,6 +100,9 @@ $_map_name = array(
 	626	=> "Zwillingsgipfel",		# 4.x
 	628	=> "Insel der Eroberung",
 	736	=> "Die Schlacht um Gilneas");	# 4.x
+unset($_map_name[628]);
+unset($_map_name[626]);
+unset($_map_name[736]);
 
 # map->id to map->abbreviation
 # accordingo to common usage
@@ -108,5 +115,17 @@ $_map_abbrev = array(
 	626	=> "TP",
 	628	=> "IOC",
 	736	=> "Gilneas"); # are you Sirius? :]
+unset($_map_abbrev[628]);
+unset($_map_abbrev[626]);
+unset($_map_abbrev[736]);
+
+$_map_min_players = array(
+        489     => 10,
+        529     => 12,
+        566     => 12,
+        30      => 20,
+        607     => 12,
+        628     => 10);
+unset($_map_min_players[628]);
 
 ?>
