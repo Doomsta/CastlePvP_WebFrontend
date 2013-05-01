@@ -47,10 +47,14 @@ $nav_links = array(
 		'url'	=> './activity.php'
 		),
 	3 => array(
+		'name'	=> 'Arena',
+		'url'	=> './arena.php'
+		),
+	4 => array(
 		'name'	=> 'Charakterprofil',
 		'url'	=> './profile.php'
 		),
-	4 => array(
+	5 => array(
 		'name'	=> 'FAQ',
 		'url'	=> './faq.php'
 		),
