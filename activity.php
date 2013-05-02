@@ -35,7 +35,7 @@ while ($row = mysql_fetch_array($result, MYSQL_ASSOC))
 }
 
 // group data by faction and player and prepare for assignment
-// player[faction][pkey][$mapid|sum|identity]
+// player[faction][pkey][$mapid|0|identity]
 $players = array(0 => array(), 1 => array()); // initialize with proper faction order, or they'll switch by whoever players faction comes first
 $battlegrounds = array();
 $n = 0;
@@ -57,12 +57,12 @@ foreach ($tmp as $bg => $dataset)
                         $award_credit = $credit;
 
 		if (!isset($battlegrounds[$bg]))
-			$battlegrounds[$bg] = 0;
-		if (!isset($battlegrounds['sum']))
-			$battlegrounds['sum'] = 0;
+			$battlegrounds[$bg] = array('value' => 0);
+		if (!isset($battlegrounds[0]))
+			$battlegrounds[0] = array('value' => 0);
 
-		$battlegrounds[$bg] += $award_credit;
-		$battlegrounds['sum'] += $award_credit;
+		$battlegrounds[$bg]['value'] += $award_credit;
+		$battlegrounds[0]['value'] += $award_credit;
                 // echo "<pre>".$timestamp."\t".$bg."\t".count($datapoint)."\t".$award_credit."\n</pre>";
 
                 foreach ($datapoint as $player)
@@ -75,25 +75,25 @@ foreach ($tmp as $bg => $dataset)
                         {
                                 $players[$faction][$pkey] = array();
                                 $players[$faction][$pkey]['identity'] = $player;
-                                $players[$faction][$pkey]['sum'] = 0;
+                                $players[$faction][$pkey][0]['value'] = 0;
                         }
 
                         if (!isset($players[$faction][$pkey][$bg]))
-                                $players[$faction][$pkey][$bg] = 0;
+                                $players[$faction][$pkey][$bg] = array('value' => 0);
 
-                        $players[$faction][$pkey][$bg] += $award_credit;
-                        $players[$faction][$pkey]['sum'] += $award_credit;
-
+                        $players[$faction][$pkey][$bg]['value'] += $award_credit;
+                        $players[$faction][$pkey][0]['value'] += $award_credit;
                 }
+
         }
 }
 
 // sorting
 function timesum($a, $b)
 {
-        if ($a['sum'] == $b['sum'])
+        if ($a[0]['value'] == $b[0]['value'])
                 return 0;
-        return ($a['sum'] > $b['sum']) ? -1 : 1;
+        return ($a[0]['value'] > $b[0]['value']) ? -1 : 1;
 }
 
 foreach ($players as $key => $value)
@@ -101,16 +101,67 @@ foreach ($players as $key => $value)
 
 // site-specific assignments
 
-// actual player data
-//print_r($players);
-$tpl->assign_vars('dataset_summary', $battlegrounds);
-$tpl->assign_vars('dataset', $players);
-
 // map list, remove 4.x maps for this listing, remove ioc also
 unset($_map_name[626]);
 unset($_map_name[736]);
 unset($_map_name[628]);
 $tpl->assign_vars('maps', $_map_name);
+
+// reformat time
+
+function reformat_time($seconds)
+{
+	$tmp = array();
+	if ($seconds > (2*86400))
+	{
+		$tmp["fontsize"] = 14;
+		$tmp["unit"] = "<span style=\"color:#B94A48\">Tage</span>";
+		$tmp["short"] = round($seconds / 86400);
+	}
+	elseif ($seconds > 7200)
+	{
+		$tmp["fontsize"] = 12;
+		$tmp["unit"] = "<span style=\"color:#3A87AD\">Std.</span>";
+		$tmp["short"] = round($seconds / 3600);
+	}
+	else
+	{
+		$tmp["fontsize"] = 9;
+		$tmp["unit"] = "<span style=\"color:#468847\">Min.</span>";
+		$tmp["short"] = round($seconds / 60);
+	}
+
+	$tmp['long'] = getDurationFromSeconds($seconds);	
+
+	return $tmp;
+}
+
+$_map_name[0] = "total"; // add virtual map to reformat total time
+foreach ($players as $faction_id => $faction)
+{
+	foreach ($faction as $pkey => $player)
+	{
+		foreach ($_map_name as $map_id => $dontgiveashit)
+		{
+			if (!isset($players[$faction_id][$pkey][$map_id]))
+				continue;
+
+			$players[$faction_id][$pkey][$map_id] = array_merge($players[$faction_id][$pkey][$map_id], reformat_time($players[$faction_id][$pkey][$map_id]['value']));
+		}
+	}
+}
+foreach ($_map_name as $map_id => $blabla)
+{
+	if (!isset($battlegrounds[$map_id]))
+		continue;
+
+	$battlegrounds[$map_id] = array_merge($battlegrounds[$map_id], reformat_time($battlegrounds[$map_id]['value']));
+}
+
+// actual player data
+//print_r($players);
+$tpl->assign_vars('dataset_summary', $battlegrounds);
+$tpl->assign_vars('dataset', $players);
 
 // class colors
 $tpl->assign_vars('class_color', $_class_color);

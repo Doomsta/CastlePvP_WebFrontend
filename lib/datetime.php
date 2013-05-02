@@ -82,5 +82,35 @@ function get_year_boundaries($timestamp)
     return array($begin, $end);
 }
 
+
+/** @title	format_duration(int seconds)
+  * @desc	given an integer of a duration in seconds
+  * 		it will format the duration as a human-readable
+  *		string
+  * @return	string
+  **/
+
+function GetDurationFromSeconds($time) {
+
+         $days = floor($time / 86400);
+         $time = $time % 86400;
+
+         $hours = floor($time / 3600);
+         $time = $time % 3600;
+
+         $minutes = floor($time / 60);
+$time = $time % 60;
+
+         $output = "";
+         if ($days > 0) $output .= $days." Tage ";
+         if ($hours > 0) $output .= $hours." Std. ";
+         if ($minutes > 0) $output .= $minutes." Min. ";
+if ($time > 0) $output .= $time." Sek.";
+
+
+         return $output;
+
+}
+
 ?>
 

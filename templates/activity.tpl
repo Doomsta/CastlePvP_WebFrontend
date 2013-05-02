@@ -1,5 +1,5 @@
 <section id="playtime">
-	<h2>Spielzeit</h2>
+	<h2>Aktivit&auml;t</h2>
 {include file='timemanager.tpl'}
 {if count($dataset) > 0}
 	<table>
@@ -22,23 +22,27 @@
 					<tr>
 						<th colspan="{2 + count($maps)}" style="background:{$faction_color[$faction_id]};color:#fff;font-variant:small-caps;text-align:center;"><big>{$faction_name[$faction_id]}</big></th>
 					</tr>
+				<!-- Summary -->
 					<tr>
 						<td style="background-color:#D0D0D0;"></td>
 {foreach $maps as $mapid => $mapname}
                         <td style="background-color:#D0D0D0;text-align:center;vertical-align:middle;">
 {if isset($dataset_summary[$mapid])}
-							<strong>{$dataset_summary[$mapid]/60}</strong>
+							<span title="{$dataset_summary[$mapid]['long']}">
+							<strong>{$dataset_summary[$mapid]['short']}</strong>
 							<br />
-							<small>Min.</small>
+							<small>{$dataset_summary[$mapid]['unit']}</small>
+							</span>
 {else}
 							-
 {/if}
 						</td>
 {/foreach}
-                        <td style="background-color:#D0D0D0;text-align:center;"><strong>{$dataset_summary['sum']/60}</strong><br />Min.</td>
+                        <td style="background-color:#D0D0D0;text-align:center;"><span title="{$dataset_summary[0]['long']}"><strong>{$dataset_summary[0]['short']}</strong><br />{$dataset_summary[0]['unit']}</span></td>
 					</tr>
+				<!-- Players -->
 {foreach $faction as $player}
-{if $player['sum'] >= (15*60)}
+{if $player[0]['value'] >= (15*60)}
 					<tr>
 						<td>
 							<a href="http://armory.wow-castle.de/character-sheet.xml?r=WoW-Castle+PvE&#38;cn={$player['identity']['name']}">
@@ -55,9 +59,11 @@
 						<td style="text-align:center;vertical-align:middle;">
 							<small>
 {if isset($player[$mapid])}
-								{$player[$mapid] / 60}
+								<span title="{$player[$mapid]['long']}" style="font-size:{$player[$mapid]['fontsize']}pt;">
+								{$player[$mapid]['short']}
 								<br />
-								<small>Min.</small>
+								<small>{$player[$mapid]['unit']}</small>
+								</span>
 {else}
 								<small>-</small>
 {/if}
@@ -65,9 +71,11 @@
 						</td>
 {/foreach}
 						<td style="text-align:center;">
-							<strong>{$player['sum']/60}</strong>
+							<span title="{$player[0]['long']}" style="font-size:{$player[$mapid]['fontsize']}pt;">
+							<strong>{$player[0]['short']}</strong>
 							<br />
-							<small>Min</small>
+							<small>{$player[0]['unit']}</small>
+							</span>
 						</td>
 					</tr>
 {/if}
