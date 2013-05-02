@@ -9,7 +9,8 @@ class castleImport
 		$out = array();
 		
 		$xml = $this->getXML($this->armoryUrl.'arena-ladder.xml?ts='.$teamSize.'&b=WoW-Castle&sf=rating&sd=d');
-		
+		if($xml === false)
+			return false;
 		$maxPage = (int) $xml->arenaLadderPagedResult['maxPage'];
 		for($i=0; $i<$maxPage; $i++)
 		{
@@ -38,6 +39,8 @@ class castleImport
 		$out = array();
 		$name = str_replace(" ", "+", $name); 
 		$xml = $this->getXML($this->armoryUrl.'team-info.xml?b=WoW-Castle&r=WoW-Castle+PvE&select='.$name);
+		if($xml === false)
+			return false;
 		foreach($xml->teamInfo->arenaTeam->members->character as $row)
 		{
 			$out[] = array(
@@ -58,13 +61,14 @@ class castleImport
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Accept-Language: de-de, de;"));
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10 );
+		curl_setopt($ch, CURLOPT_TIMEOUT_MS, 400);     
 		$content = curl_exec ($ch);
 		curl_close ($ch);
 		try{
 			$xml = new SimpleXMLElement($content);
 		} 
 		catch (Exception $e) {
-			die("Castle down ?");		
+			return false;		
 		} 
 		return $xml;
 	}

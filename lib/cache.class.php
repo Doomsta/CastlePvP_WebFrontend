@@ -25,13 +25,13 @@ class cache {
 		return time() - filemtime($path);
 	}
 	
-	public function load($key, $expire) 
+	public function load($key, $expire=0)
 	{
 		$key = md5($key);
 		$path = $this->cachepath.'/'.$key.'.'.$this->extension;
 		if( file_exists($path))
 		{
-			if(time() < (filemtime($path) + $expire))
+			if(time() < (filemtime($path) + $expire) OR $expire == 0)
 				return unserialize(file_get_contents($path));
 			else
 				unlink($path);
