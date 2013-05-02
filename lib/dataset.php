@@ -45,7 +45,7 @@ function group_dataset_by_steps($dataset, $index, $firststep, $laststep, $stepsi
 			foreach ($index as $iter)
 				$step_tmp[$iter][] = $datapoint[$iter];
 		}
-		$dataset_iter += $i; # write back iterator
+		$dataset_iter = $i; # write back iterator
 
 		# collapse the data for this step
 		$collapse_tmp = array();
