@@ -7,14 +7,6 @@ require_once($rootpath."lib/formatting.php");
 $interval = Boundaries::Week;
 
 $credit = 300; # award 300s (=5m) per record by default
-$min_players = array(   
-        489     => 10,  
-        529     => 12,  
-        566     => 12,  
-        30      => 20,  
-        607     => 12,  
-        628     => 10); 
-
 
 // here be dragons
 require_once($rootpath."timemanager.php");
@@ -44,7 +36,7 @@ while ($row = mysql_fetch_array($result, MYSQL_ASSOC))
 
 // group data by faction and player and prepare for assignment
 // player[faction][pkey][$mapid|sum|identity]
-$players = array();
+$players = array(0 => array(), 1 => array(), 2 => array()); // initialize with proper faction order, or they'll switch by whoever players faction comes first
 $battlegrounds = array();
 $n = 0;
 foreach ($tmp as $bg => $dataset)
@@ -58,7 +50,7 @@ foreach ($tmp as $bg => $dataset)
 
                 // determine if battleground has enough players to stay open,
                 // otherwise only award 0.5*credit
-                if (count($datapoint) < $min_players[$bg])
+                if (count($datapoint) < $_map_min_players[$bg])
                         $award_credit = 0;
 //                        $award_credit = 0.5 * $credit;
                 else
@@ -131,10 +123,10 @@ $tpl->assign_vars('faction_color', $_faction_color);
 $tpl->set_vars(array(
 			'page_title'		=> 'PvP@Castle - Aktivit&auml;tsrangliste',
 			'author'		=> 'hexa-',
-			'nav_active'		=> 'Spielzeit',
-			'sub_nav_active'	=> 'Spielzeit',
+			'nav_active'		=> 'Aktivit&auml;t',
+			'sub_nav_active'	=> '',
 			'subHeadBig'		=> 'PvP@Castle',
-			'subHeadSmall'		=> 'Spielzeit',
+			'subHeadSmall'		=> 'Aktivit&auml;t',
 			'description'		=> 'PvP@Castle',
 			'image'			=> "",
 			'template_file'		=> 'activity.tpl',

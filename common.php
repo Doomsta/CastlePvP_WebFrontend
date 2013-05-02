@@ -43,12 +43,12 @@ $nav_links = array(
 				   'icon'	=> './img/battlegrounds/607.jpg'))
 		),
 	2 => array(
-		'name'	=> 'Aktivit&auml;tsrangliste',
-		'url'	=> './activity.php'
-		),
-	3 => array(
 		'name'	=> 'Arena',
 		'url'	=> './arena.php'
+		),
+	3 => array(
+		'name'	=> 'Aktivit&auml;t',
+		'url'	=> './activity.php'
 		),
 	4 => array(
 		'name'	=> 'Charakterprofil',
