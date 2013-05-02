@@ -44,8 +44,26 @@ $nav_links = array(
 		),
 	2 => array(
 		'name'	=> 'Arena',
-		'url'	=> './arena.php'
+		'url'	=> './arena.php',
+		'sub'   => array(
+			0 => array(
+				'name'	=> 'Übersicht',
+				'url'	=> './arena.php'
+			),
+			1 => array(
+				'name'	=> '2vs2',
+				'url'	=> './arena2v2.php'
+			),
+			3 => array(
+				'name'	=> '3vs3',
+				'url'	=> './arena3v3.php'
+			),
+			4 => array(
+				'name'	=> '5vs5',
+				'url'	=> './arena5v5.php'
+			),
 		),
+	),
 	3 => array(
 		'name'	=> 'Aktivit&auml;t',
 		'url'	=> './activity.php'
