@@ -30,7 +30,7 @@
 		</tr>
 {foreachelse}
 		<tr>
-			<td colspan="4"><font color="#FF0000"><center><big>keine Teams vorhanden</big></center></font></td>
+			<td colspan="5"><font color="#FF0000"><center><big>keine Teams vorhanden</big></center></font></td>
 		</tr>				
 {/foreach}
 	</table>
