@@ -36,7 +36,7 @@ while ($row = mysql_fetch_array($result, MYSQL_ASSOC))
 
 // group data by faction and player and prepare for assignment
 // player[faction][pkey][$mapid|sum|identity]
-$players = array(0 => array(), 1 => array(), 2 => array()); // initialize with proper faction order, or they'll switch by whoever players faction comes first
+$players = array(0 => array(), 1 => array()); // initialize with proper faction order, or they'll switch by whoever players faction comes first
 $battlegrounds = array();
 $n = 0;
 foreach ($tmp as $bg => $dataset)
