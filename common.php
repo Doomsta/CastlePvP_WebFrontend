@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set('UTC');
+date_default_timezone_set('Europe/Berlin'); 
 session_start();
 
 $rootpath = './';

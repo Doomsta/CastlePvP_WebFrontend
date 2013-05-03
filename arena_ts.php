@@ -23,6 +23,7 @@ if($castle->getArenaTeams($ts,1) !=false) //ok castle is on everythink fine ^^
 	}
 	else //load the cache
 	{
+		
 		$tmp = $c->load('arena_ladder_'.$ts);
 	}
 	
@@ -39,8 +40,11 @@ else //oh snap! castle is down .. load last cache data
 	}
 }
 
+$last_load = date('H:i d.m.y', time() - $c->getCachedTime('arena_ladder_'.$ts));
+
 $tpl->assign_vars('ARENA_TEAMS', $tmp);
 $tpl->assign_vars('TS', $ts);
+$tpl->assign_vars('LAST_LOAD', $last_load);
 
 $tpl->set_vars(array(
 			'page_title'		=> 'PvP@Castle - Arena/'.$ts.'vs'.$ts,

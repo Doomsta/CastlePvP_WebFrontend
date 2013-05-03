@@ -34,5 +34,6 @@
 		</tr>				
 {/foreach}
 	</table>
+	Letzte Aktualisierung: {$LAST_LOAD}
 <section
 		
