@@ -7,11 +7,14 @@ $castle = new castleImport();
 
 if (!isset($ts))
         die("This file cannot be called directly");
-		
-if($castle->getArenaTeams($ts,1) !=false) //ok castle is on everythink fine ^^
+	
+if( $c->getCachedTime('arena_ladder_'.$ts) < 600 AND $c->getCachedTime('arena_ladder_'.$ts) != false)
+	$tmp = $c->load('arena_ladder_'.$ts);
+else
 {
-	if($c->getCachedTime('arena_ladder_'.$ts) == false OR $c->getCachedTime('arena_ladder_'.$ts) > 600)  //we got no cache or old data ...gen new one
-	{
+	if($castle->getArenaTeams(2,1) !=false) //test castle
+	{ 
+		//castle is up and cache is old ... gen new data 
 		$tmp = $castle->getArenaTeams($ts, 20);
 		foreach($tmp as $i => $row_i)
 		{
@@ -21,24 +24,17 @@ if($castle->getArenaTeams($ts,1) !=false) //ok castle is on everythink fine ^^
 		}
 		$c->store('arena_ladder_'.$ts,$tmp);
 	}
-	else //load the cache
+	else 
 	{
-		
-		$tmp = $c->load('arena_ladder_'.$ts);
-	}
-	
-}
-else //oh snap! castle is down .. load last cache data
-{
-	if($c->getCachedTime('arena_ladder_'.$ts) == false) // no cache ? ... thats rly bad
-	{
-		die('Castle down and no Cached data Sry');
-	}
-	else	//load old cache data
-	{
-		$tmp = $c->load('arena_ladder_'.$ts);
+		//oh castle is offline load old cache
+		echo "castle down";
+		if($c->load('arena_ladder_'.$ts) !== false)
+			$c->store('arena_ladder_'.$ts,$tmp);
+		else
+			die('castle offline and no cache gg');
 	}
 }
+
 
 $last_load = date('H:i d.m.y', time() - $c->getCachedTime('arena_ladder_'.$ts));
 
