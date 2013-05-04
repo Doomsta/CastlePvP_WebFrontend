@@ -5,7 +5,8 @@
 			<th>Platz</th>
 			<th>Name</th>
 			<th>Spieler</th>
-			<th>Won/Played</th>
+			<th>Won/Played<br /> (woche)</th>
+			<th>Won/Played<br /> (season)</th>
 			<th>Rating</th>
 		</tr>
 {foreach key=i item=wert from=$ARENA_TEAMS}
@@ -24,7 +25,10 @@
 {/foreach}
 			</td>
 			<td>
-				<big>{$wert.gamesWon}/{$wert.gamesPlayed}<big>
+			{$wert.gamesPlayed}/{$wert.gamesWon}
+			</td>
+			<td>
+				<big>{$wert.seasonGamesWon}/{$wert.seasonGamesPlayed}<big>
 			</td>
 			<td>{$wert.rating}</td>
 		</tr>

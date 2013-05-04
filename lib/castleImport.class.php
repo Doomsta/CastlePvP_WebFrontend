@@ -28,6 +28,8 @@ class castleImport
 				$out[($i*20+$j)]['rating'] = (int) $xml->arenaLadderPagedResult->arenaTeams->arenaTeam[$j]['rating'];
 				$out[($i*20+$j)]['gamesPlayed'] = (int) $xml->arenaLadderPagedResult->arenaTeams->arenaTeam[$j]['gamesPlayed'];
 				$out[($i*20+$j)]['gamesWon'] = (int) $xml->arenaLadderPagedResult->arenaTeams->arenaTeam[$j]['gamesWon'];
+				$out[($i*20+$j)]['seasonGamesWon'] = (int) $xml->arenaLadderPagedResult->arenaTeams->arenaTeam[$j]['seasonGamesWon'];
+				$out[($i*20+$j)]['seasonGamesPlayed'] = (int) $xml->arenaLadderPagedResult->arenaTeams->arenaTeam[$j]['seasonGamesPlayed'];
 				$out[($i*20+$j)]['factionId'] = (int) $xml->arenaLadderPagedResult->arenaTeams->arenaTeam[$j]['factionId'];
 			}
 		}
