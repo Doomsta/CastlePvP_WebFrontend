@@ -24,4 +24,9 @@
         {/foreach}
         </ul>
         </div>
+
+	<!-- Permalink -->
+	<div style="float:right;padding-top:5px;padding-right:5px;">
+	<a href="?d={$param_d}&amp;i={$param_i}"><small>Permalink</small></a>
+	</div>
     </div>
