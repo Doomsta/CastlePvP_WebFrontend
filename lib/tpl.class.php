@@ -9,6 +9,7 @@ class tpl
 	private $css_files = "";
 	private $css_code;
 	private $script = "";
+	private $icon;
 	private $base_template = 'page.tpl';
 	
 	function __construct() 
@@ -92,16 +93,24 @@ class tpl
 		$this->script .= "<script>".$value."</script>\n";
 	}
 
+	function set_defaultIcon($icon)
+	{
+		$this->icon = $icon;
+	}
+	
 	function set_vars($array)
 	{
 		$this->smarty->assign("PAGE_TITLE", $array['page_title']);
 		$this->smarty->assign("DESCRIPTION", $array['description']);
 		$this->smarty->assign("AUTHOR", $array['author']);
-		$this->smarty->assign("IMAGE", $array['image']);
+		if(!empty($this->icon))
+			$this->smarty->assign("ICON", $this->icon);
+		else
+			$this->smarty->assign("ICON", $array['icon']);
+			
 		$this->smarty->assign("SUBHEADBIG", $array['subHeadBig']);
 		$this->smarty->assign("SUBHEADSMALL", $array['subHeadSmall']);
 		$this->tpl_file = $array['template_file'];
-		
 		$this->smarty->assign("NAV_LINKS", $this->set_active($array['nav_active'], $this->nav_links)); 
 		$this->smarty->assign("SUB_NAV_LINKS", $this->set_active($array['sub_nav_active'], $this->sub_nav_links)); 
 	}

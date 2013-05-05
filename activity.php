@@ -179,7 +179,6 @@ $tpl->set_vars(array(
 			'subHeadBig'		=> 'PvP@Castle',
 			'subHeadSmall'		=> 'Aktivit&auml;t',
 			'description'		=> 'PvP@Castle',
-			'image'			=> "",
 			'template_file'		=> 'activity.tpl',
 			));
 $tpl->display();

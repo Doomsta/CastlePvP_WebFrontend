@@ -25,7 +25,6 @@ $tpl->set_vars(array(
 			'subHeadBig'		=> 'PvP@Castle Home',
 			'subHeadSmall'		=> 'PvP@Castle Home',
 			'description'		=> 'PvP@Castle',
-			'image'				=> "",
 			'template_file'		=> 'index.tpl',
 			));
 $tpl->display();

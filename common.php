@@ -79,6 +79,7 @@ $nav_links = array(
 	);
 $tpl->add_nav_links($nav_links);
 
+$tpl->set_defaultIcon('./img/icon.png');
 # MySQL Connection
 mysql_connect($mysql_host, $mysql_user, $mysql_pass);
 mysql_select_db($mysql_db);

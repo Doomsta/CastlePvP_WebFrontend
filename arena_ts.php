@@ -50,7 +50,7 @@ $tpl->set_vars(array(
 			'subHeadBig'		=> 'PvP@Castle',
 			'subHeadSmall'		=> $ts.'vs'.$ts,
 			'description'		=> 'PvP@Castle',
-			'image'				=> './img/icon.png',
+			'icon'				=> './img/icon.png',
 			'template_file'		=> 'arena_ts.tpl',
 			));
 $tpl->display();

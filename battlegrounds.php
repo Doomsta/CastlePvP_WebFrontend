@@ -78,7 +78,6 @@ $tpl->set_vars(array(
 			'subHeadBig'		=> 'PvP@Castle',
 			'subHeadSmall'		=> 'Schlachtfelder',
 			'description'		=> 'PvP@Castle',
-			'image'				=> "",
 			'template_file'		=> 'battlegrounds.tpl',
 			));
 $tpl->display();

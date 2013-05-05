@@ -10,7 +10,6 @@ $tpl->set_vars(array(
 			'subHeadBig'		=> 'PvP@Castle',
 			'subHeadSmall'		=> 'Übersicht',
 			'description'		=> 'PvP@Castle',
-			'image'				=> './img/icon.png',
 			'template_file'		=> 'arena.tpl',
 			));
 $tpl->display();
