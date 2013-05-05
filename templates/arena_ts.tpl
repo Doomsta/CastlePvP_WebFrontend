@@ -25,7 +25,7 @@
 {/foreach}
 			</td>
 			<td>
-			{$wert.gamesPlayed}/{$wert.gamesWon}
+			{$wert.gamesWon}/{$wert.gamesPlayed}
 			</td>
 			<td>
 				<big>{$wert.seasonGamesWon}/{$wert.seasonGamesPlayed}</big>
