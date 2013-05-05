@@ -28,7 +28,7 @@
 			{$wert.gamesPlayed}/{$wert.gamesWon}
 			</td>
 			<td>
-				<big>{$wert.seasonGamesWon}/{$wert.seasonGamesPlayed}<big>
+				<big>{$wert.seasonGamesWon}/{$wert.seasonGamesPlayed}</big>
 			</td>
 			<td>{$wert.rating}</td>
 		</tr>
