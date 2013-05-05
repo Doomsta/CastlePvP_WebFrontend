@@ -7,30 +7,29 @@ class castleImport
 	public function getArenaTeams($teamSize = 2, $limit = 20)
 	{
 		$out = array();
-		
 		$xml = $this->getXML($this->armoryUrl.'arena-ladder.xml?ts='.$teamSize.'&b=WoW-Castle&sf=rating&sd=d');
 		if($xml === false)
 			return false;
 		$maxPage = (int) $xml->arenaLadderPagedResult['maxPage'];
 		for($i=0; $i<$maxPage; $i++)
 		{
-			if($i != 0) //skip nr 0
-				$content =  $this->getXML($this->armoryUrl.'arena-ladder.xml?p='.($i+1).'&ts='.$teamSize.'&b=WoW-Castle&sf=rating&sd=d');
+			if($i != 0) //0 is already loaded
+				$xml =  $this->getXML($this->armoryUrl.'arena-ladder.xml?p='.($i+1).'&ts='.$teamSize.'&b=WoW-Castle&sf=rating&sd=d');
 			
 			//work with the data
-			for($j=0; $j<20; $j++)
+			foreach($xml->arenaLadderPagedResult->arenaTeams->arenaTeam as $row)
 			{
-				if(($i*20+$j)>$limit-1)
+				if(count($out) > ($limit-1))
 					break;
-				if(!isset($xml->arenaLadderPagedResult->arenaTeams->arenaTeam[$j]['name']))
-					continue;
-				$out[($i*20+$j)]['name'] = (string) $xml->arenaLadderPagedResult->arenaTeams->arenaTeam[$j]['name'];
-				$out[($i*20+$j)]['rating'] = (int) $xml->arenaLadderPagedResult->arenaTeams->arenaTeam[$j]['rating'];
-				$out[($i*20+$j)]['gamesPlayed'] = (int) $xml->arenaLadderPagedResult->arenaTeams->arenaTeam[$j]['gamesPlayed'];
-				$out[($i*20+$j)]['gamesWon'] = (int) $xml->arenaLadderPagedResult->arenaTeams->arenaTeam[$j]['gamesWon'];
-				$out[($i*20+$j)]['seasonGamesWon'] = (int) $xml->arenaLadderPagedResult->arenaTeams->arenaTeam[$j]['seasonGamesWon'];
-				$out[($i*20+$j)]['seasonGamesPlayed'] = (int) $xml->arenaLadderPagedResult->arenaTeams->arenaTeam[$j]['seasonGamesPlayed'];
-				$out[($i*20+$j)]['factionId'] = (int) $xml->arenaLadderPagedResult->arenaTeams->arenaTeam[$j]['factionId'];
+				$out[] = array(
+					'name' => (string) $row['name'],
+					'rating' => (int) $row['rating'],
+					'gamesPlayed' => (int) $row['gamesPlayed'],
+					'gamesWon' => (int) $row['gamesWon'],
+					'seasonGamesWon' => (int) $row['seasonGamesWon'],
+					'seasonGamesPlayed' => (int) $row['seasonGamesPlayed'],
+					'factionId' => (int) $row['factionId']
+				);
 			}
 		}
 		return $out;
