@@ -12,7 +12,7 @@ if( $c->getCachedTime('arena_ladder_'.$ts) < 600 AND $c->getCachedTime('arena_la
 	$tmp = $c->load('arena_ladder_'.$ts);
 else
 {
-	if(($tmp = $castle->getArenaTeams($ts,1)) !== false)
+	if(($tmp = $castle->getArenaTeams($ts,20)) !== false)
 	{ 
 		//castle is up and cache is old ... gen new data 
 		foreach($tmp as $i => $row_i)
