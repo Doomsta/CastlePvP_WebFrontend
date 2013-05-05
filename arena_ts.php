@@ -12,10 +12,9 @@ if( $c->getCachedTime('arena_ladder_'.$ts) < 600 AND $c->getCachedTime('arena_la
 	$tmp = $c->load('arena_ladder_'.$ts);
 else
 {
-	if($castle->getArenaTeams(2,1) !=false) //test castle
+	if(($tmp = $castle->getArenaTeams($ts,1)) !== false)
 	{ 
 		//castle is up and cache is old ... gen new data 
-		$tmp = $castle->getArenaTeams($ts, 20);
 		foreach($tmp as $i => $row_i)
 		{
 			$tmp[$i]['player'] = $castle->getArenaTeam($row_i['name']);
@@ -36,7 +35,7 @@ else
 }
 
 
-$last_load = date('H:i d.m.y', time() - $c->getCachedTime('arena_ladder_'.$ts));
+$last_load = strftime("%d. %b %Y, %H:%m", time() - $c->getCachedTime('arena_ladder_'.$ts));
 
 $tpl->assign_vars('ARENA_TEAMS', $tmp);
 $tpl->assign_vars('TS', $ts);

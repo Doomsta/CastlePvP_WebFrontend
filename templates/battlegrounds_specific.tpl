@@ -1,5 +1,5 @@
 <section id="battlegrounds">
-    <h2>{$title}</h2>
+    <h1>Schlachtfelder<br /><small>{$title}</small></h1>
     {include file='timemanager.tpl'}
     <br />
     <h3>Klassenverteilung</h3>

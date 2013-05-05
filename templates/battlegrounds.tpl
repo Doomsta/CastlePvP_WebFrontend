@@ -1,5 +1,5 @@
 <section id="battlegrounds">
-    <h2>Schlachtfelder</h2>
+    <h1>Schlachtfelder</h1>
     {include file='timemanager.tpl'}
     <canvas id="bgtimesum" width="900" height="400"></canvas>
     <script>

@@ -62,14 +62,14 @@ class castleImport
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Accept-Language: de-de, de;"));
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10 );
-		curl_setopt($ch, CURLOPT_TIMEOUT_MS, 400);     
+		curl_setopt($ch, CURLOPT_TIMEOUT_MS, 1500);     
 		$content = curl_exec ($ch);
 		curl_close ($ch);
 		try{
 			$xml = new SimpleXMLElement($content);
 		} 
 		catch (Exception $e) {
-			return false;		
+			return false;
 		} 
 		return $xml;
 	}

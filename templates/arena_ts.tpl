@@ -1,5 +1,5 @@
 <section id="arena">
-	<h1>Arena Teams {$TS}vs{$TS}</h1>
+	<h1>Arena<br /><small>{$TS}vs{$TS}</small></h1>
 	<table class="table table-striped table-condensed">
 		<tr>
 			<th>Platz</th>

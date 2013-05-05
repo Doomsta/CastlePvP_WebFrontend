@@ -1,5 +1,6 @@
 <?php
-date_default_timezone_set('Europe/Berlin'); 
+setlocale(LC_ALL, "de_DE.UTF-8");
+date_default_timezone_set('Europe/Berlin');
 session_start();
 
 $rootpath = './';
