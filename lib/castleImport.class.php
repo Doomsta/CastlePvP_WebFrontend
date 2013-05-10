@@ -41,11 +41,81 @@ class castleImport
 						'gamesWon' => (int) $member['gamesWon'],
 						'gamesPlayed' => (int) $member['gamesPlayed'],
 						'seasonGamesWon' => (int) $member['seasonGamesWon'],
-							'seasonGamesPlayed' => (int) $member['seasonGamesPlayed']
+						'seasonGamesPlayed' => (int) $member['seasonGamesPlayed']
 					);
 				}
 			}
 		}
+		//gear
+		foreach($xml->characterInfo->characterTab->items->item as $item) 
+		{
+	
+			$out['items'][(string)$item['slot']]['id']  = (string) $item['id'];
+			$out['items'][(string)$item['slot']]['name']  = (string) $item['name'];
+			$out['items'][(string)$item['slot']]['level']  = (int) $item['level'];
+			$out['items'][(string)$item['slot']]['rarity']  = (int) $item['rarity'];
+			$out['items'][(string)$item['slot']]['icon']  = (int) $item['icon'];
+			for($i=0;!empty($item['gem'.$i.'Id']);$i++)
+			{
+				$out['items'][(string)$item['slot']]['gemIds'][$i] = (int) $item['gem'.$i.'Id'];
+			}
+			$out['items'][(string)$item['slot']]['permanentEnchantItemId']  = (int) $item['permanentEnchantItemId'];
+		}
+		//stats
+		//base
+		$out['stats']['base']['str'] = (string) $xml->characterInfo->characterTab->baseStats->strength['effective'];  
+		$out['stats']['base']['agi'] = (string) $xml->characterInfo->characterTab->baseStats->agility['effective']; 
+		$out['stats']['base']['sta'] = (string) $xml->characterInfo->characterTab->baseStats->stamina['effective']; 
+		$out['stats']['base']['int'] = (string) $xml->characterInfo->characterTab->baseStats->intellect['effective']; 
+		$out['stats']['base']['spr'] = (string) $xml->characterInfo->characterTab->baseStats->spirit['effective'];  
+		//melee
+		$out['stats']['melee']['mainHandDmgMin'] = (string) $xml->characterInfo->characterTab->melee->mainHandDamage['min'];
+		$out['stats']['melee']['mainHandDmgMax'] = (string) $xml->characterInfo->characterTab->melee->mainHandDamage['max'];
+		$out['stats']['melee']['mainHandSpeed'] = (string) $xml->characterInfo->characterTab->melee->mainHandDamage['speed'];
+		$out['stats']['melee']['mainHandDps'] = (string) $xml->characterInfo->characterTab->melee->mainHandDamage['dps'];
+		
+		$out['stats']['melee']['offHandDmgMin'] = (string) $xml->characterInfo->characterTab->melee->offHandDamage['min'];
+		$out['stats']['melee']['offHandDmgMax'] = (string) $xml->characterInfo->characterTab->melee->offHandDamage['max'];
+		$out['stats']['melee']['offHandSpeed'] = (string) $xml->characterInfo->characterTab->melee->offHandDamage['speed'];
+		$out['stats']['melee']['offHandDps'] = 	(string) $xml->characterInfo->characterTab->melee->offHandDamage['dps'];
+		
+		$out['stats']['melee']['attackPower'] = (string) $xml->characterInfo->characterTab->melee->power['effective'];
+		$out['stats']['melee']['hasteRating'] = (string) $xml->characterInfo->characterTab->spell->hasteRating['hasteRating'];
+		$out['stats']['melee']['crit'] = (string) $xml->characterInfo->characterTab->melee->critChance['percent'];
+		$out['stats']['melee']['hitRating'] = (string) $xml->characterInfo->characterTab->melee->hitRating['increasedHitRating'];
+		$out['stats']['melee']['hitPercent'] = (string) $xml->characterInfo->characterTab->melee->hitRating['increasedHitPercent'];
+		$out['stats']['melee']['expertise'] = (string) $xml->characterInfo->characterTab->melee->expertise['value'];
+		$out['stats']['melee']['arpPercent'] = (string) $xml->characterInfo->characterTab->melee->hitRating['reducedArmorRating']; 
+		$out['stats']['melee']['arpPercent'] = (string) $xml->characterInfo->characterTab->melee->hitRating['reducedArmorPercent']; 
+		//ranged
+		$out['stats']['ranged']['dmgMin'] = (string) $xml->characterInfo->characterTab->ranged->damage['min'];
+		$out['stats']['ranged']['dmgMax'] = (string) $xml->characterInfo->characterTab->ranged->damage['max'];
+		$out['stats']['ranged']['Speed'] = (string) $xml->characterInfo->characterTab->ranged->damage['speed'];
+		$out['stats']['ranged']['dps'] = (string) $xml->characterInfo->characterTab->ranged->damage['dps'];
+		$out['stats']['ranged']['expertise'] = (string) $xml->characterInfo->characterTab->melee->expertise['value'];
+		$out['stats']['ranged']['crit'] = (string) $xml->characterInfo->characterTab->ranged->critChance['percent'];
+		$out['stats']['ranged']['hitRating'] = (string) $xml->characterInfo->characterTab->ranged->hitRating['percent'];
+		$out['stats']['ranged']['attackPower'] = (string) $xml->characterInfo->characterTab->ranged->power['effective'];
+		//caster
+		$out['stats']['caster']['spellPower'] = (string) $xml->characterInfo->characterTab->spell->bonusDamage->holy['value'];
+		$out['stats']['caster']['spellPen'] = (string) $xml->characterInfo->characterTab->spell->penetration['value'];
+		$out['stats']['caster']['spellCrit'] = (string) $xml->characterInfo->characterTab->spell->critChance->holy['percent'];
+		$out['stats']['caster']['spellCritRating'] = (string) $xml->characterInfo->characterTab->spell->critChance['rating'];
+		$out['stats']['caster']['spellHitPercent'] = (string) $xml->characterInfo->characterTab->spell->hitRating['increasedHitPercent'];
+		$out['stats']['caster']['spellHitRating'] = (string) $xml->characterInfo->characterTab->spell->hitRating['value'];
+		$out['stats']['caster']['mana5'] = (string) $xml->characterInfo->characterTab->spell->manaRegen['notCasting'];
+		$out['stats']['caster']['mana5Combat'] = (string) $xml->characterInfo->characterTab->spell->manaRegen['casting'];
+		//def
+		$out['stats']['def']['armor'] = (string) $xml->characterInfo->characterTab->defenses->armor['base'];
+		$out['stats']['def']['dodge'] = (string) $xml->characterInfo->characterTab->defenses->dodge['percent'];
+		$out['stats']['def']['dodgeRating'] = (string) $xml->characterInfo->characterTab->defenses->dodge['rating'];
+		$out['stats']['def']['parry'] = (string) $xml->characterInfo->characterTab->defenses->parry['percent'];
+		$out['stats']['def']['parryRating'] = (string) $xml->characterInfo->characterTab->defenses->parry['rating'];
+		$out['stats']['def']['block'] = (string) $xml->characterInfo->characterTab->defenses->block['percent'];
+		$out['stats']['def']['blockRating'] = (string) $xml->characterInfo->characterTab->defenses->block['rating'];
+		$out['stats']['def']['resilienceRating'] = (string) $xml->characterInfo->characterTab->defenses->resilience['value'];
+		$out['stats']['def']['resilienceHitPercent'] = (string) $xml->characterInfo->characterTab->defenses->resilience['hitPercent'];
+		$out['stats']['def']['resilienceDamagePercent'] = (string) $xml->characterInfo->characterTab->defenses->resilience['damagePercent'];
 		return ($out);
 	}
 	
@@ -57,7 +127,7 @@ class castleImport
 		if($xml === false)
 			return false;
 		$maxPage = (int) $xml->arenaLadderPagedResult['maxPage'];
-		for($i=0; $i<$maxPage; $i++)
+		for($i=0; $i<=$maxPage; $i++)
 		{
 			if($i != 0) //0 is already loaded
 				$xml =  $this->getXML($this->armoryUrl.'arena-ladder.xml?p='.($i+1).'&ts='.$teamSize.'&b=WoW-Castle&sf=rating&sd=d');
