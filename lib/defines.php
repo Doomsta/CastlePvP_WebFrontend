@@ -11,7 +11,7 @@ $_race_name = array(
 	2	=> "Ork",
 	3	=> "Zwerg",
 	4	=> "Nachtelf",
-	5	=> "Untote",
+	5	=> "Untoter",
 	6	=> "Taure",
 	7	=> "Gnom",
 	8	=> "Troll",
@@ -127,5 +127,28 @@ $_map_min_players = array(
         607     => 12,
         628     => 10);
 unset($_map_min_players[628]);
+
+$_slotId_name = array(
+	0 => 'head' , 
+	1 => 'neck', 
+	2 => 'shoulder', 
+	14 => 'back',
+	4 => 'chest',
+	3 => 'shirt',
+	18 => 'tabard',
+	8 => 'wrist',
+			
+	9 => 'hands',
+	5 => 'waist', //belt
+	6 => 'legs',
+	7 => 'feet',
+	10 => 'finger1',
+	11 => 'finger2',
+	12 => 'trinket1',
+	13 => 'trinket2',
+	15 => 'mainHand',
+	16 => 'offHand',
+	17 => 'relik'
+	);
 
 ?>

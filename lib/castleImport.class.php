@@ -6,6 +6,8 @@ class castleImport
 	public function getChar($name)
 	{
 		$out = array();
+		if(!ctype_alpha($name))
+			return false;
 		$xml = $this->getXML($this->armoryUrl.'character-sheet.xml?r=WoW-Castle+PvE&cn='.$name);
 		if($xml->characterInfo->character['name'] == false)
 			return false;
